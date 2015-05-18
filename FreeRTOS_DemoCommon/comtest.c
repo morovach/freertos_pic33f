@@ -182,11 +182,13 @@ TickType_t xTimeToWait;
 	{
 		/* Simply transmit a sequence of characters from comFIRST_BYTE to
 		comLAST_BYTE. */
-		for( cByteToSend = comFIRST_BYTE; cByteToSend <= comLAST_BYTE; cByteToSend++ )
+                cByteToSend = comFIRST_BYTE;
+		while(cByteToSend <= comLAST_BYTE )
 		{
 			if( xSerialPutChar( xPort, cByteToSend, comNO_BLOCK ) == pdPASS )
 			{
 				vParTestToggleLED( uxBaseLED + comTX_LED_OFFSET );
+                                cByteToSend ++;
 			}
 		}
 
@@ -226,7 +228,7 @@ TickType_t xTimeToWait;
 	{
 		/* Simply transmit a sequence of characters from comFIRST_BYTE to
 		comLAST_BYTE. */
-		for( cByteToSend = comFIRST_BYTE; cByteToSend <= comLAST_BYTE; cByteToSend++ )
+		for( ;; )
 		{
 			if( xSerialPutChar( xPort, 0x41, comNO_BLOCK ) == pdPASS )
 			{
